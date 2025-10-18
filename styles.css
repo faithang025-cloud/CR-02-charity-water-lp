@@ -9,14 +9,79 @@
    - Dark neutral for body text
 */
 :root{
-  --color-primary: #0aa5a2;   /* teal */
-  --color-accent:  #ff8a4b;   /* warm orange */
-  --color-dark:    #0d2636;   /* deep navy */
+  /* Primary / secondary palette supplied by user */
+  --color-primary: #2E9DF7; /* Blue */
+  --color-accent:  #FFC907; /* Yellow (accent) */
+  --color-secondary-1: #8BD1CB; /* Light Blue */
+  --color-secondary-2: #4FCB53; /* Green */
+  --color-secondary-3: #FF902A; /* Orange */
+  --color-secondary-4: #F5402C; /* Red */
+  --color-secondary-5: #159A48; /* Dark Green */
+  --color-secondary-6: #F16061; /* Pink */
+
+  --color-dark:    #0d2636;   /* deep navy (used for text in light mode) */
   --color-bg:      #f7fbfb;   /* very light */
   --max-width:     1000px;
   --container-padding: 20px;
   --radius: 8px;
-  --font-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  /* Fonts: prefer Proxima Nova, then Avenir, then system fallbacks */
+  --font-sans: "Proxima Nova", "Avenir", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  /* Additional tokens for consistent theming */
+  --panel-bg:      #ffffff;   /* panels and cards */
+  --card-bg:       #ffffff;   /* card background */
+  --color-muted:   #5b6b70;   /* secondary text */
+  --footer-color:  #6b7a80;
+  --btn-primary-bg: rgba(13,38,54,0.6);
+}
+
+/*
+  Webfont loading: Proxima Nova and Avenir
+  - This project does not include commercial font files. To use the exact fonts:
+    1) Add the .woff2 files to /landingPage/fonts/ (recommended filenames below).
+    2) Or replace the src URLs with your webfont provider (Adobe Fonts, etc.).
+  - font-display: swap is used to avoid invisible text while fonts load.
+*/
+@font-face{
+  font-family: 'Proxima Nova';
+  src: url('/landingPage/fonts/ProximaNova-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: 'Proxima Nova';
+  src: url('/landingPage/fonts/ProximaNova-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: bold;
+  font-display: swap;
+}
+@font-face{
+  font-family: 'Avenir';
+  src: url('/landingPage/fonts/Avenir-Book.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: 'Avenir';
+  src: url('/landingPage/fonts/Avenir-Heavy.woff2') format('woff2');
+  font-weight: 700;
+  font-style: bold;
+  font-display: swap;
+}
+
+/* Dark theme variables: set when data-theme="dark" is on <html> */
+[data-theme="dark"]{
+  /* Keep brand colors, but update UI tokens for dark background */
+  --color-primary: #2E9DF7; /* keep blue */
+  --color-accent:  #FFC907; /* keep yellow accent */
+  --color-dark:    #e6f6f5; /* light text color for dark mode */
+  --color-bg:      #071214; /* dark background */
+  --panel-bg:      #08191a; /* dark panel */
+  --card-bg:       #0b2222;
+  --color-muted:   #9fb6b3; /* muted light text */
+  --footer-color:  #9fb6b3;
+  --btn-primary-bg: rgba(255,255,255,0.06);
 }
 
 /* Global resets and typography - keep this small and beginner friendly */
@@ -81,7 +146,7 @@ main, .site-footer { max-width: var(--max-width); margin: 0 auto; padding: var(-
   color: white;
 }
 .btn-primary{
-  background: rgba(13,38,54,0.6); /* slightly dark translucent to pair with image */
+  background: var(--btn-primary-bg, rgba(13,38,54,0.6)); /* uses variable to allow dark-mode override */
   border: 2px solid rgba(255,255,255,0.12);
 }
 .btn-accent{
@@ -116,14 +181,14 @@ main, .site-footer { max-width: var(--max-width); margin: 0 auto; padding: var(-
 }
 
 /* Small utility styles */
-.muted { color: #5b6b70; font-size: 0.95rem; }
+.muted { color: var(--color-muted, #5b6b70); font-size: 0.95rem; }
 
 /* DONATION SECTION
    - Centered content and large CTA
 */
 .donation{
   text-align: center;
-  background: white;
+  background: var(--panel-bg, #fff);
   border-radius: var(--radius);
   padding: 30px 20px;
   margin: 20px 0 60px 0;
@@ -138,7 +203,7 @@ main, .site-footer { max-width: var(--max-width); margin: 0 auto; padding: var(-
 .site-footer{
   text-align:center;
   padding: 30px 20px;
-  color: #6b7a80;
+  color: var(--footer-color, #6b7a80);
 }
 
 /* RESPONSIVE RULES (media queries)

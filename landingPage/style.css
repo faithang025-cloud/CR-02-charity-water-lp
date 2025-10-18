@@ -1,0 +1,200 @@
+/* Landing page styles - cleaned and annotated for readability
+   Improvements in this file:
+   - Use CSS variables for easy color edits
+   - Do not force body to full viewport height (lets footer naturally flow)
+   - Use min-height on the main container to allow content to grow
+   - Add small accessibility focus styles
+*/
+
+:root{
+  /* keep layout tokens here; color tokens come from the shared root styles.css */
+  --radius: 8px;
+  --max-width: 1200px;
+  --gap: 2rem;
+  --page-padding: 2rem;
+  --font-stack: 'Helvetica Neue', Arial, sans-serif;
+
+  /* map local names to the global color variables for clarity and fallbacks */
+  --site-bg: var(--color-bg, #f7fbfb);
+  --primary: var(--color-primary, #2E9DF7);
+  --accent: var(--color-accent, #FFC907);
+  --dark: var(--color-dark, #0d2636);
+}
+
+/* Dark theme overrides when data-theme="dark" is set on <html> */
+[data-theme="dark"]{
+  --site-bg: #071214; /* very dark */
+  --primary: #0aa5a2; /* keep teal */
+  --accent: #ff8a4b; /* keep accent */
+  --dark: #e6f6f5; /* light text */
+}
+
+/* smooth transitions for color changes */
+html,body,section,div{transition: background-color 200ms ease, color 200ms ease}
+
+/* reset box-sizing and remove default margins */
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* Theme switch (small pill) placed near the logo */
+.theme-switch{display:inline-flex;align-items:center;justify-content:flex-start;width:46px;height:26px;background:rgba(13,38,54,0.08);border-radius:999px;border:none;padding:3px;cursor:pointer;margin-left:12px}
+.theme-switch .switch-dot{width:18px;height:18px;background:var(--card-bg, #fff);border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.12);transform:translateX(0);transition:transform 180ms ease, background 180ms ease}
+.theme-switch[aria-pressed="true"]{background:linear-gradient(90deg,var(--primary),var(--accent))}
+.theme-switch[aria-pressed="true"] .switch-dot{transform:translateX(20px);background:#fff}
+
+/* Fixed-position variant for top-left placement */
+.theme-switch--fixed{position:fixed;left:14px;top:14px;width:46px;height:26px;padding:3px;z-index:1200;box-shadow:0 8px 20px rgba(2,6,23,0.12);background:var(--panel-bg, rgba(255,255,255,0.92));border:1px solid rgba(13,38,54,0.06)}
+.theme-switch--fixed:focus{outline:3px solid rgba(10,165,162,0.14);outline-offset:3px}
+.theme-switch--fixed[aria-pressed="true"]{background:linear-gradient(90deg,var(--primary),var(--accent))}
+.theme-switch--fixed[aria-pressed="true"] .switch-dot{transform:translateX(18px)}
+
+body{
+  /* prefer the shared font variable from the global stylesheet */
+  font-family: var(--font-sans, var(--font-stack));
+  background: var(--site-bg);
+  color: var(--dark);
+  line-height:1.4;
+}
+
+/* Center the content area but allow the page to grow (footer below) */
+.container{
+  display:flex;
+  width:100%;
+  max-width:var(--max-width);
+  margin: 0 auto;
+  min-height: calc(100vh - 120px); /* visually-filling but lets footer sit below */
+}
+
+/* LEFT: content panel with branding and CTA */
+.left-section{
+  flex:1;
+  background: linear-gradient(180deg,var(--panel-bg, #ffffff), color-mix(in srgb, var(--panel-bg, #ffffff) 90%, #ffffff)); /* panel uses theme variable */
+  padding: calc(var(--page-padding) * 1.5);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(13,38,54,0.04);
+}
+
+.logo{width:160px;margin-bottom:1.25rem}
+
+h1{font-size:2.2rem;line-height:1.15;color:var(--dark);margin:0 0 0.75rem}
+.subtitle{color:var(--color-muted);margin-bottom:1.75rem}
+
+/* CTA uses the global .btn and .btn-accent classes for consistent appearance */
+.cta-button{padding:0.9rem 1.6rem;border-radius:var(--radius);text-decoration:none;font-weight:700;width:fit-content}
+
+/* ensure .btn-accent (from shared styles) looks good on this page */
+.btn-accent{background:var(--primary);color:#fff}
+.btn-primary{background:var(--btn-primary-bg, rgba(13,38,54,0.85));color:#fff}
+
+/* RIGHT: image panel */
+.right-section{flex:1;position:relative}
+.hero-image{width:100%;height:100%;object-fit:cover;display:block;border-radius:8px}
+
+/* Footer styles - simple and readable */
+footer{background:transparent;color:var(--footer-color, rgba(13,38,54,0.8));padding:2rem 1.5rem}
+.footer-container{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;max-width:var(--max-width);margin:0 auto}
+.footer-left{flex:1 1 260px;max-width:480px}
+.footer-links{display:flex;gap:1.25rem;align-items:center}
+.footer-links a{color:var(--accent);text-decoration:none}
+.footer-links a:hover{color:var(--dark)}
+.footer-socials{display:flex;gap:1rem;align-items:center}
+.footer-bottom{border-top:1px solid rgba(13,38,54,0.06);padding-top:1rem;margin-top:1rem;color:var(--color-muted, rgba(13,38,54,0.6))}
+
+/* Accessibility: visible focus for keyboard users */
+a:focus{outline:3px solid rgba(10,165,162,0.18);outline-offset:3px}
+
+/* Tooltip styling for elements using data-tooltip="..." */
+[data-tooltip]{position:relative}
+[data-tooltip]::after{
+  content: attr(data-tooltip);
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%) translateY(-8px);
+  bottom:calc(100% + 8px);
+  background: rgba(10,10,10,0.9);
+  color: #fff;
+  padding:6px 8px;
+  border-radius:6px;
+  font-size:13px;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 160ms ease, transform 160ms ease;
+  z-index:1400;
+}
+[data-tooltip]:hover::after,
+[data-tooltip]:focus::after,
+[data-tooltip]:focus-within::after{
+  opacity:1;
+  transform:translateX(-50%) translateY(-12px);
+}
+
+/* Make tooltip visible for keyboard users when element receives focus */
+[data-tooltip]:focus-visible::after{opacity:1}
+
+/* Slightly different style for the fixed theme switch so the tooltip doesn't overlap page edges */
+.theme-switch--fixed::after{left:calc(100% + 8px);transform:none;bottom:auto;top:50%;translate:0 -50%}
+.theme-switch--fixed:hover::after,.theme-switch--fixed:focus::after{opacity:1}
+
+/* Responsive: stack columns on small screens */
+@media (max-width:768px){
+  .container{flex-direction:column;min-height: auto}
+  .left-section,.right-section{width:100%;height:50vh}
+  .left-section{align-items:center;text-align:center;padding:1.25rem}
+  .logo{margin:0 auto 1rem}
+  .footer-container{flex-direction:column;align-items:center;text-align:center}
+}
+
+/* small screens: reduce heading size */
+@media (max-width:420px){h1{font-size:1.4rem}}
+
+/* VALUES SECTION */
+.values-section{background:var(--site-bg);color:var(--dark);padding:3rem 1.5rem}
+.values-inner{max-width:var(--max-width);margin:0 auto}
+.values-section h2{font-size:1.6rem;margin-bottom:0.25rem;color:var(--dark)}
+.values-section .muted{color:var(--color-muted);max-width:720px}
+
+.values-grid{display:flex;gap:1.25rem;margin-top:1.5rem}
+.value-card{background:var(--card-bg, #fff);border-radius:10px;overflow:hidden;flex:1;box-shadow:0 6px 18px rgba(13,38,54,0.06);display:flex;flex-direction:column;border-top:4px solid var(--accent)}
+.value-card h3{margin:0.9rem 1rem 0;font-size:1.05rem;color:var(--dark)}
+.value-card p{margin:0.5rem 1rem 1rem;color:var(--color-muted)}
+.value-photo{width:100%;height:190px;object-fit:cover;display:block}
+
+/* FOLLOW / SOCIALS */
+.follow-us{background:linear-gradient(180deg, var(--site-bg) 0%, color-mix(in srgb, var(--site-bg) 90%, #f1f6f6) 100%);padding:2rem 1.5rem}
+.follow-inner{max-width:var(--max-width);margin:0 auto;text-align:center}
+.follow-inner h3{margin:0 0 0.25rem;color:var(--dark)}
+.follow-inner .muted{color:var(--color-muted);margin-bottom:1rem}
+.social-buttons{display:flex;gap:0.75rem;justify-content:center;margin-top:0.75rem}
+.social-btn{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700}
+.social-btn{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;transition:transform .18s ease, filter .18s ease}
+.social-btn:hover{transform:translateY(-3px);filter:brightness(.9)}
+
+/* small accent under the values heading to match the site's color pop */
+.values-section h2::after{content:"";display:block;width:48px;height:4px;background:var(--primary);margin:10px 0 0;border-radius:2px}
+
+@media (max-width:768px){
+  .values-grid{flex-direction:column}
+  .value-photo{height:160px}
+  .social-buttons{flex-wrap:wrap}
+}
+
+/* FEATURE SPLIT (minimal style to match head) */
+.feature-split{padding:0;margin:0}
+.feature-inner{display:flex;gap:1.25rem;max-width:var(--max-width);margin:0 auto}
+.feature-image{flex:1;position:relative;min-height:320px;overflow:hidden;border-radius:8px}
+.feature-image img{width:100%;height:100%;object-fit:cover;display:block}
+.feature-overlay{position:absolute;left:0;right:0;bottom:0;padding:24px;background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 60%);color:#fff;display:flex;flex-direction:column;gap:0.5rem}
+.feature-overlay h2{margin:0;font-size:1.6rem}
+.feature-overlay .muted{opacity:0.9}
+.feature-copy{flex:1;padding:1.5rem 0;display:flex;flex-direction:column;justify-content:center}
+
+@media (max-width:900px){
+  .feature-inner{flex-direction:column}
+  .feature-image{order:0;min-height:220px}
+  .feature-copy{order:1;padding-top:1rem}
+  .feature-overlay{padding:16px}
+}
+

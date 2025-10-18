@@ -4,26 +4,96 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>charity: water | Water First. Futures Follow.</title>
+  <!-- Global, beginner-friendly styles (variables, hero, buttons) -->
+  <link rel="stylesheet" href="../styles.css" />
+  <!-- Page-specific styles (keeps the dark split-layout and image) -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+  <!-- Fixed theme toggle in top-left (out of the main flow) -->
+  <button id="theme-toggle" class="theme-switch theme-switch--fixed" aria-pressed="false" aria-label="Toggle dark mode" data-tooltip="Toggle dark mode">
+    <span class="switch-dot" aria-hidden="true"></span>
+  </button>
+  <!-- Main page container: left content + right image -->
+  <main class="container" role="main">
     <div class="left-section">
       <div class="branding">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Charity_Water_logo.svg/2560px-Charity_Water_logo.svg.png" alt="charity water logo" class="logo" />
+  <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Charity_Water_logo.svg/2560px-Charity_Water_logo.svg.png" alt="charity water logo" class="logo" />
       </div>
       <h1>Water First.<br>Futures Follow.</h1>
       <p class="subtitle">Clean water restores time and hope—<br>with impact you can see.</p>
-      <a href="#" class="cta-button">Make a difference</a>
+  <!-- add shared .btn and .btn-accent so the global styles apply too -->
+  <a href="#" class="cta-button btn btn-accent" aria-label="Make a difference" data-tooltip="Make a difference">Make a difference</a>
     </div>
 
-    <div class="right-section">
-      <img src="https://images.unsplash.com/photo-1606220652268-3da0a8d2c0e8?auto=format&fit=crop&w=1000&q=80" alt="Pouring clean water" class="hero-image" />
+    <aside class="right-section" aria-hidden="true">
+  <img loading="lazy" src="https://images.unsplash.com/photo-1606220652268-3da0a8d2c0e8?auto=format&fit=crop&w=1000&q=80" alt="Pouring clean water" class="hero-image" />
+    </aside>
+  </main>
+
+  <!-- Values section: clear boxes with organization words and large inspirational photos -->
+  <section class="values-section" aria-labelledby="values-heading">
+    <div class="values-inner">
+      <h2 id="values-heading">Our Values</h2>
+      <p class="muted">We design programs with respect, transparency, and measurable impact. Below are a few of the ideas that guide our work.</p>
+
+      <div class="values-grid">
+        <article class="value-card">
+          <img loading="lazy" class="value-photo" src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=60" alt="Volunteers building a well" />
+          <h3>Transparency</h3>
+          <p>We show donors exactly where funds are spent and the people they help.</p>
+        </article>
+
+        <article class="value-card">
+          <img loading="lazy" class="value-photo" src="https://images.unsplash.com/photo-1506347463932-82640a6d9a3a?auto=format&fit=crop&w=1200&q=60" alt="Community celebrating clean water" />
+          <h3>Community</h3>
+          <p>Local leadership and participation are at the center of every project.</p>
+        </article>
+
+        <article class="value-card">
+          <img loading="lazy" class="value-photo" src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1200&q=60" alt="Child with clean water" />
+          <h3>Impact</h3>
+          <p>Clean water restores time, health, and education — effects that last generations.</p>
+        </article>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Feature split: large landscape photo with minimal overlay text on left, clean copy on right -->
+  <section class="feature-split" aria-label="Featured story">
+    <div class="feature-inner">
+      <div class="feature-image" role="img" aria-label="Community drawing water">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1600&q=60" alt="Community drawing water" />
+        <div class="feature-overlay">
+          <h2>Water changes everything</h2>
+          <p class="muted">When a community has clean water, schools, health, and hope follow.</p>
+          <a class="btn btn-primary" href="#" data-tooltip="Read the story">Read the story</a>
+        </div>
+      </div>
+      <div class="feature-copy">
+        <h3>Featured project</h3>
+        <p class="muted">A short summary introducing the featured project. Keep this copy minimal and focused—one or two sentences that invite the reader to learn more.</p>
+        <p>We partner with local leaders to build long-lasting, community-owned water systems. This approach ensures projects remain functional for years to come.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Follow / socials callout (larger buttons linking to social pages) -->
+  <section class="follow-us" aria-label="Follow us">
+    <div class="follow-inner">
+      <h3>Follow our journey</h3>
+      <p class="muted">See stories, photos, and real-time updates from the field.</p>
+      <div class="social-buttons">
+        <a class="social-btn" href="#" aria-label="Facebook">f</a>
+        <a class="social-btn" href="#" aria-label="Instagram">ig</a>
+        <a class="social-btn" href="#" aria-label="Twitter">t</a>
+        <a class="social-btn" href="#" aria-label="YouTube">yt</a>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer Section -->
-  <footer>
+  <footer class="site-footer" role="contentinfo">
     <div class="footer-container">
       <div class="footer-left">
         <p>charity: water is a nonprofit organization bringing clean and safe drinking water to people in developing countries.</p>
@@ -40,6 +110,7 @@
         <a href="#" aria-label="Twitter">🐦</a>
       </div>
     </div>
+     <script src="dark-toggle.js"></script>
     <p class="footer-bottom">© 2025 charity: water. All rights reserved.</p>
   </footer>
 </body>
