@@ -114,7 +114,11 @@ body{
   box-shadow: 0 14px 48px rgba(13,38,54,0.06);
 }
 
-.logo{width:200px;max-width:44%;margin-bottom:1.25rem;display:block}
+.logo{display:block;max-height:1120px;width:auto;max-width:44%;margin-bottom:1.25rem;object-fit:contain}
+
+/* Footer logo variants when using inline image replacements */
+.footer-logo{vertical-align:middle;max-height:36px;width:auto;margin-right:0.5rem}
+.footer-logo.small{max-height:20px;margin-right:0.5rem}
 
 /* Headings: slightly larger and more airy for a modern feel */
 h1{font-size:2.97rem;line-height:1.08;color:var(--dark);margin:0 0 0.75rem;font-weight:800}
@@ -123,11 +127,12 @@ h1{font-size:2.97rem;line-height:1.08;color:var(--dark);margin:0 0 0.75rem;font-
 /* CTA: more prominent, rounded, with hover and focus states for accessibility */
 .cta-button{padding:1.2rem 2rem;border-radius:999px;text-decoration:none;font-weight:800;display:inline-block;box-shadow:0 10px 26px rgba(46,157,247,0.12)}
 
-/* ensure .btn-accent (from shared styles) looks good on this page */
-.btn-accent{background:var(--primary);color:#fff;border:none}
+/* ensure .btn-accent (from shared styles) looks good on this page
+  Use the yellow accent with dark text to meet contrast requirements */
+.btn-accent{background:var(--accent);color:var(--dark);border:none}
 .btn-accent:hover{filter:brightness(0.98);transform:translateY(-1px)}
 .btn-accent:active{transform:translateY(0)}
-.btn-accent:focus{outline:3px solid color-mix(in srgb, var(--primary) 22%, #fff);outline-offset:4px}
+.btn-accent:focus{outline:3px solid color-mix(in srgb, var(--accent) 22%, #000);outline-offset:4px}
 
 .btn-primary{background:var(--btn-primary-bg, rgba(13,38,54,0.85));color:#fff;padding:0.85rem 1.5rem;border-radius:12px}
 .btn-primary:hover{filter:brightness(1.06)}
@@ -187,7 +192,7 @@ a:focus{outline:3px solid rgba(10,165,162,0.18);outline-offset:3px}
   .container{flex-direction:column;min-height: auto}
   .left-section,.right-section{width:100%;height:50vh}
   .left-section{align-items:center;text-align:center;padding:1.25rem}
-  .logo{margin:0 auto 1rem}
+  .logo{margin:0 auto 1rem;max-height:96px}
   .footer-container{flex-direction:column;align-items:center;text-align:center}
 }
 
@@ -215,6 +220,15 @@ a:focus{outline:3px solid rgba(10,165,162,0.18);outline-offset:3px}
 .social-buttons{display:flex;gap:0.75rem;justify-content:center;margin-top:0.75rem}
 .social-btn{display:inline-flex;align-items:center;justify-content:center;width:70px;height:70px;border-radius:14px;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;transition:transform .18s ease, filter .18s ease;box-shadow:0 10px 26px rgba(255,201,7,0.12)}
 .social-btn:hover{transform:translateY(-3px);filter:brightness(.95)}
+
+/* Make SVG icons inherit the button color so we can tint via `color` */
+.social-btn svg{display:block;width:22px;height:22px}
+.social-btn svg path{fill:currentColor}
+.social-btn:focus{outline:3px solid color-mix(in srgb, var(--primary) 20%, #fff);outline-offset:4px}
+
+/* Footer social icons: smaller and muted color */
+.footer-socials a svg{width:18px;height:18px}
+.footer-socials a svg path{fill:var(--footer-color, #6b7a80)}
 
 /* small accent under the values heading to match the site's color pop */
 .values-section h2::after{content:"";display:block;width:56px;height:6px;background:var(--primary);margin:10px 0 0;border-radius:3px}

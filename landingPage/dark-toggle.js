@@ -27,4 +27,16 @@
     const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
     setTheme(current === 'dark' ? 'light' : 'dark');
   });
+
+  // Keyboard shortcut: press 'd' (or 'D') to toggle dark mode when not typing
+  window.addEventListener('keydown', (e) => {
+    const tag = (e.target && e.target.tagName) || '';
+    if(tag === 'INPUT' || tag === 'TEXTAREA' || e.ctrlKey || e.metaKey || e.altKey) return;
+    if(e.key && e.key.toLowerCase() === 'd'){
+      e.preventDefault();
+      toggle.click();
+      // Move focus back to the toggle for screen-reader users
+      toggle.focus();
+    }
+  });
 })();
