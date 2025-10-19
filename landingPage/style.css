@@ -89,6 +89,7 @@ body{
   /* prefer the shared font variable from the global stylesheet */
   font-family: var(--font-sans, var(--font-stack));
   background: var(--site-bg);
+  background-color: (#8BD1CB);
   color: var(--dark);
   line-height:1.4;
 }

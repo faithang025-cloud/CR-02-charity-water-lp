@@ -11,11 +11,11 @@ window.IMAGES = {
   lightLogo: 'img/charitywater_logo_vertical_AllBlack.png',
   // and the supplied white-text logo for dark mode
   darkLogo: 'img/charitywater_logo_vertical_WhiteText.png',
-  hero: 'img/hero.jpg',
+  hero: 'img/EthiopiaWater.jpeg',
   value1: 'img/value1.jpg',
   value2: 'img/value2.jpg',
   value3: 'img/value3.jpg',
-  feature: 'img/feature.jpg'
+  feature: 'img/StudyWithWater.jpg'
 };
 
 (function applyImages(){
