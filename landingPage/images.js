@@ -12,9 +12,9 @@ window.IMAGES = {
   // and the supplied white-text logo for dark mode
   darkLogo: 'img/charitywater_logo_vertical_WhiteText.png',
   hero: 'img/EthiopiaWater.jpeg',
-  value1: 'img/value1.jpg',
-  value2: 'img/value2.jpg',
-  value3: 'img/value3.jpg',
+  value1: 'img/waterMada.jpg',
+  value2: 'img/Tanzaniawater.jpg',
+  value3: 'img/waterenhance.jpg',
   feature: 'img/StudyWithWater.jpg'
 };
 
