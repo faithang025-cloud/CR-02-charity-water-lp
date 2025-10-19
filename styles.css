@@ -86,7 +86,7 @@
 
 /* Global resets and typography - keep this small and beginner friendly */
 * { box-sizing: border-box; }
-html,body { margin:0; padding:0; height:100%; background:var(--color-bg); color:var(--color-dark); font-family:var(--font-sans); }
+html,body { margin:0; padding:0; height:100%; background:var(--color-bg); color:var(--color-dark); font-family:var(--font-sans); font-size:17.5px; }
 p { line-height:1.5; margin:0 0 1rem 0; }
 
 /* Simple container centering for page content */
